@@ -12,8 +12,9 @@ import Alamofire
 final class ApiClient {
   static let shared: ApiClient = { return ApiClient() }()
 
-  func getWeather() {
-    let parameters: Parameters = ["zip":"06700,mx", "appid": "73d2c071949a8c5d75ebffcc1338c190"]
+  func getWeatherByZip(code: String, city: String, completion: @escaping (Weather?) -> Void) {
+    let parameters: Parameters = ["zip":"\(code),\(city)", "appid": "73d2c071949a8c5d75ebffcc1338c190"]
+    
     let url = "http://api.openweathermap.org/data/2.5/weather"
     let request = Alamofire.request(url, method: .get,
                                    parameters: parameters,
@@ -26,13 +27,13 @@ final class ApiClient {
         Logger.shared.info("Api, getWeater Success")
         if let data = response.result.value as? [String: Any],
           let main = data["main"] as? [String: Any] {
-          main.forEach({ (entry) in
-            print("--> entry \(entry)")
-          })
+          let weather = Weather(dictionary: main)
+          print("---> weather \(weather.temp)")
         }
       case .failure(let error):
         print(error)
       }
+      completion(nil)
     }
   }
 }
