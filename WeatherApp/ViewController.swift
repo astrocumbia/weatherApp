@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class ViewController: UIViewController {
 
@@ -14,7 +15,12 @@ class ViewController: UIViewController {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
     //ApiClient.init()
-    //ApiClient.shared.getWeather()
+    
+    ApiClient.shared.getWeatherByZip(code: "06700", city: "mx") { (response) in
+      print("--> \(response)")
+    }
+    
+    
   }
 
   override func didReceiveMemoryWarning() {
