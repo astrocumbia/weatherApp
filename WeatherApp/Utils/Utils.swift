@@ -10,8 +10,13 @@ import Foundation
 
 struct Utils {
   
-  static func tempToCelcius(fahrenheit: Float) -> Float {
+  static func fromFarhnheitToCelcius(fahrenheit: Float) -> Float {
     let c = (fahrenheit - 32) * 5/9
+    return (c*100).rounded() / 100
+  }
+  
+  static func fromKelvinToCelcius(kelvin: Float) -> Float {
+    let c = kelvin - 273.15
     return (c*100).rounded() / 100
   }
 }

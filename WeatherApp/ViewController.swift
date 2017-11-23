@@ -11,13 +11,20 @@ import RxSwift
 
 class ViewController: UIViewController {
 
+  @IBOutlet weak var stackView: UIStackView!
+  @IBOutlet weak var infoLabel: UILabel!
+  @IBOutlet weak var weatherLabel: UILabel!
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
     //ApiClient.init()
     
     ApiClient.shared.getWeatherByZip(code: "06700", city: "mx") { (response) in
-      print("--> \(response)")
+      if let weather = response {
+        let temp = Utils.fromKelvinToCelcius(kelvin: weather.temp)
+        self.weatherLabel.text = "\(Int(round(temp)))º"
+      }
     }
     
     

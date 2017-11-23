@@ -45,8 +45,4 @@ class ApiTest: XCTestCase {
     }
   }
   
-  func testConverter() {
-    let result = Utils.tempToCelcius(fahrenheit: 100)
-    XCTAssertEqual(result, 37.78)
-  }
 }
