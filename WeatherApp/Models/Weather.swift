@@ -26,4 +26,5 @@ struct Weather {
     pressure = dictionary["pressure"] as? Float ?? 0.0
     humidity = dictionary["humidity"] as? Float ?? 0.0
   }
+
 }
